@@ -1,3 +1,8 @@
 "merge testing "
 new changes to merge file
+<<<<<<< HEAD
 local changes are here
+=======
+
+---- hai i am adding new changes over here
+>>>>>>> 2b5449087d505b062296897ecacca518867f206b

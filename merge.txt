@@ -1,2 +1,3 @@
 "merge testing "
 new changes to merge file
+local changes are here

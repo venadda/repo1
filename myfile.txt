@@ -1,1 +1,2 @@
 "something to file"
+"new lines are added"

@@ -1,1 +1,1 @@
-build job1
+build 'job2'

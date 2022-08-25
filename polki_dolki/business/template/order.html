@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load i18n static %}
+{% load bootstrap4 %}
+{% block title %}
+    {{'vendor'}}
+{% endblock %}
+{% block content %}
+
+{{ datatable }}
+{% endblock %}
+{% block userscript%}
+
+
+<script type="text/javascript">
+    $(function(){
+        datatableview.initialize($('.datatable'));
+    });
+</script>
+{% endblock %}

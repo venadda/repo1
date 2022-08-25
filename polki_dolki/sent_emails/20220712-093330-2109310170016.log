@@ -1,0 +1,13 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: testing
+From: webmaster@localhost
+To: ven@gmail.com
+Date: Tue, 12 Jul 2022 04:03:31 -0000
+Message-ID: <165759861100.11548.1384269605825574977@DESKTOP-B74IBHC>
+
+Someone asked for password reset for email ven@gmail.com.Follow the Link below
+http://localhost:8000{% url "password_reset_confirm"
+uidb64=uid token=token %}
+-------------------------------------------------------------------------------

@@ -1,0 +1,281 @@
+{% extends 'base.html' %}
+{% load i18n static %}
+{% load bootstrap4 %}
+{% block title %}Vendor Follow UPs List View{% endblock title %}
+{% block content %}
+<h4 class="bg-info border border-info rounded">Vendor Follow Ups List</h4>
+<div class="col-* border border-primary rounded ml-4 mr-4">
+<form action="" method="post" class="form">
+    {% csrf_token %}
+    {% if msg == None %}
+    <h5 hidden>{{msg}}</h5>
+    {% else %}
+    <h5>{{msg}}</h5>
+    {% endif %}
+    <table class="stripe cell-border row-border order-column" id="vendorfollowups" width="100%">
+        <thead>
+
+        <tr>
+            {% for row in forms.0 %}
+            <th><small>{{row.label}}</small><i class="fa fa-sort text-warning ml-4"></i></th>
+            {% endfor %}
+            <th>Action</th>
+
+        </tr>
+
+        </thead>
+        <tbody>
+
+        {% for data in forms %} <!--data.id.value 'edit'/data.id.value 'edit'-->
+        <tr>
+            {% for d in data %}
+            <td>{% if d.value is None %}<small>{{''}}</small>{%else%}<small>{{d.value}}</small>{%endif%}</td>
+            {%endfor%}<!--
+            <td>{{data.id.value}}</td>
+            {% if data.first_name.value is not None %}
+            <td>{{data.first_name.value}}</td>
+            {% else %}
+            <td>&nbsp;</td>
+            {%endif%}
+            <td>{{data.middle_name.value}}</td>
+            <td>{{data.last_name.value}}</td>
+            <td>{{data.primary_no.value}}</td>
+            <td>{{data.secondary_no.value}}</td>
+            <td>{{data.company_email_id.value}}</td>
+            <td>{{data.company_name.value}}</td>
+            <td data-value="{{data.content.value}}">{{data.content.value|truncatechars:7}}</td>
+
+            <td>{% if data.website_url.value is not None %}{{data.website_url.value}} {% endif %}</td>
+            <td>{% if data.product.value is not None %}{{data.product.value}}{% endif %}</td>
+            <td>{% if data.referemce.value is not None %} {{data.reference.value}}{% endif %}</td>
+            <td>{% if data.comments.value is not None %}{{data.comments.value}}{% endif %}</td>
+            <td>{% if data.created_by.value is not None %}{{data.created_by.value}}{% endif %}</td>
+            <td>{% if data.created_date.value is not None %}{{data.created_date.value}}{% endif %}</td>
+            <td>{% if data.updated_by.value is not None %}{{data.updated_by.value}}{% endif %}</td>
+            <td>{% if data.updated_date.value is not None %}{{data.updated_date.value}}{% endif %}</td>
+            <td>{% if data.vendor_id.value is not None %}{{data.vendor_id.value}}{% endif %}</td>
+            -->
+            <td>
+                {% if data.id.value != None %}
+                <a class='item-row' href="{% url 'vendorfollowupsEdit' id=data.id.value%}" title='View'><i class='fa fa-eye' aria-hidden='true'
+                                                             style='margin-right:10px;'></i></a>
+                <a class='item-row' href="{% url 'vendorfollowupsEdit' id=data.id.value%}" title='Edit'><i class='fa-solid fa-edit'
+                                                             style='margin-right:10px;'></i></a>
+                <a title='Delete' class='item-row' href="{% url 'vendorfollowupsDel' id=data.id.value vendor_id=data.vendor_id.value%}"><i class='fa-solid fa-trash-can'
+                                                               style='margin-left:10px;'></i></a>
+
+                {%else%}
+                <a class='item-row' href="#" title='View'><i class='fa fa-eye' aria-hidden='true'
+                                                             style='margin-right:10px;'></i></a>
+                <a class='item-row' href="#" title='Edit'><i class='fa-solid fa-edit'
+                                                             style='margin-right:10px;'></i></a>
+                <a title='Delete' class='item-row' href="#"><i class='fa-solid fa-trash-can'
+                                                               style='margin-left:10px;'></i></a>
+                {% endif %}
+            </td>
+        </tr>
+
+        {% empty %}
+        <p> no data available.</p>
+
+        {% endfor %}
+
+        </tbody>
+    </table>
+
+
+</form>
+{% endblock %}
+{%  block button %}
+<form method="get" action="{% url 'addvendorfollowup' vendor_id %}">
+    {% csrf_token %}
+    <div class="row d-flex flex-row-reverse  mr-4">
+    <button class="btn btn-primary pull-right" type="submit"><i class="fa fa-plus" aria-hidden="true"></i>Add</button>
+</div>
+</form>
+</div>
+<div class="row">&nbsp;</div>
+<div class="row">&nbsp;</div>
+<div class="row">&nbsp;</div>
+{% endblock %}
+{% block userscript %}
+<script>
+
+$(document).ready(function () {
+    $('#vendorfollowups tfoot th').each(function () {
+        var title = $(this).text();
+        $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+    });
+
+    var oTable = $('#vendorfollowups').dataTable({
+
+        "processing": true,
+        pagingType: 'full_numbers',
+        scrollX: true,
+        scrollCollapse: true,
+         //fixedColumns: true,
+
+        //"serverSide": true
+        //"ajax": "{% url 'orderlist' %}"
+         fixedColumns:   {
+            left: 1,
+            right: 1
+        },
+         dom: 'Bfrtip',
+         lengthMenu: [
+            [ 10, 25, 50, -1 ],
+            [ '10 rows', '25 rows', '50 rows', 'Show all' ]
+        ],
+        /*,
+         columnDefs: [
+            {
+                targets: -1,
+                data: null,
+                defaultContent: '<button>Click!</button>',
+            },
+        ],*/
+        buttons: {
+
+             buttons:[
+
+            'pageLength',
+            'colvis',
+            /* {
+            extend: 'columnVisibility',
+            text: 'Show all',
+            visibility: true
+        },
+        {
+            extend: 'columnVisibility',
+            text: 'Hide all',
+            visibility: false
+        },*/
+             {
+                extend:    'copyHtml5',
+                text:      '<i class="fa-solid fa-copy"></i>',
+                titleAttr: 'Copy',
+                className: 'btn btn-primary'
+            },
+            {
+                extend:    'excelHtml5',
+                text:      '<i class="fa-solid fa-file-excel"></i>',
+                titleAttr: 'Excel',
+                className: 'btn-primary'
+            },
+            {
+                extend:    'csvHtml5',
+                text:      '<i class="fa-solid fa-file-text"></i>',
+                titleAttr: 'CSV',
+                className: 'btn btn-primary'
+            },
+            {
+                extend:    'pdfHtml5',
+                text:      '<i class="fa-solid fa-file-pdf"></i>',
+                titleAttr: 'PDF',
+                className: 'btn-primary'
+            },
+            {
+                extend: 'print',
+                text:'<i class="fa-solid fa-print"></i>',
+                titleAttr:'Print',
+                autoPrint: false,
+                className: 'btn-primary'
+            }],
+            dom:{button: { className: "btn btn-primary"}}
+            /*,
+            {
+                text:'<i class="fa fa-file-excel-o"></i>',
+                titleAttr:'Add',
+                action: function ( e, dt, node, config ) {
+                    alert( 'Button activated' );
+                }
+*/
+
+        },
+        "bDestroy": true,
+
+
+               initComplete: function () {
+            // Apply the search
+
+            this.api()
+                .columns()
+                .every(function () {
+                    var that = this;
+
+                    $('input', this.footer()).on('keyup change clear', function () {
+                        if (that.search() !== this.value) {
+                            that.search(this.value).draw();
+                        }
+                    });
+                });
+                //var tableData = $( this.api().rows( {order: 'index'} ).data() );
+        },
+
+    });
+    //var columns = oTable.api().columns().settings();
+    //console.log(columns);
+ $('#vendorfollowups tbody').on('click', 'button', function () {
+        var data = table.row($(this).parents('tr')).data();
+        alert(data[0] +" "+ data[5]);
+    });
+    $('#vendorfollowups').dataTable.ext.errMode = function ( settings, helpPage, message ) {
+    console.log(settings,helpPage,message);
+
+};
+ var table = $('#vendorfollowups').DataTable();
+
+/*
+    $('#vendor1').on('click', 'tr', function () {
+        var idx = table.row(this).index();
+        data= table.row(this).data();
+        console.log(data[0]);
+      $("#description").val(table.row(this));
+
+      $('#DescModal').modal("show");
+    });
+*/
+/*$('#vendor1 tbody').on('click', 'tr', function () {
+        var data = table.row(this).data-value.data();
+        alert('You clicked on ' + data + "'s row");
+    });*/
+});
+$(document).ready(function () {
+    // Setup - add a text input to each footer cell
+/* var table = $('#vendor1').DataTable({
+
+  });*/
+    // DataTable
+   /* var table = $('#vendor1').DataTable({
+        initComplete: function () {
+            // Apply the search
+            this.api()
+                .columns()
+                .every(function () {
+                    var that = this;
+
+                    $('input', this.footer()).on('keyup change clear', function () {
+                        if (that.search() !== this.value) {
+                            that.search(this.value).draw();
+                        }
+                    });
+                });
+        },
+    });*/
+});
+
+$(document).ready(function(){
+$(".ddclick").on('click',function(){
+try{
+console.log($(this).data('value'));
+ $(".modal_body").html($(this).data('value'));
+ $('.modal-dialog').dialog();
+ //$('.modal-dialog').modal('show');
+//alert($(this).data('value'));
+}catch(err){console.log(err);}
+});
+});
+
+</script>
+
+{% endblock %}

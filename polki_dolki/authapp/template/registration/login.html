@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+{% block title %}Login{% endblock title %}
+
+{% block content %}
+<div class="container">
+ <div class="col-* col-sm-12 col-md-8 col-lg-6 col-xl-6">
+<div class="col-4">
+    </div>
+    <div >
+        <h3 class="bg-primary text-white border border-primary rounded">Log-in</h3>
+        {% if form.errors %}
+        <p>
+            Your username and password didn't match.Please
+            Please try again.
+        </p>
+        {% else %}
+        {% endif %}
+    </div>
+        <div class="row">&nbsp;</div>
+    <form action="" method="post" class="form container border border-primary rounded">
+        <p><a href="{% url 'password_reset' %}"><small>Forgotten your password?</small></a></p>
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% buttons %}
+        <input type="hidden" name="next" value="{{ next }}" />
+        <button type="submit" class="btn btn-primary">Submit</button>
+        {% endbuttons %}
+    </form>
+        <div class="row">&nbsp;</div>
+        <div class="row">&nbsp;</div>
+</div>
+</div>
+</div>
+
+{% endblock content %}

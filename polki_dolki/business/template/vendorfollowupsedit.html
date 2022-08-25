@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+{% load i18n static %}
+{% load bootstrap4 %}
+{% block title %}Add Vendor Follow Ups{% endblock title %}
+{% block content %}
+
+<h4 class="bg-info border border-info rounded col-*">Edit Vendor Follow Ups </h4>
+<div class="border border-primary rounded">
+<form action="" method="post" class="form col-* ">
+    {% csrf_token %}
+    <!--{% bootstrap_form form %}-->
+    <div class="row">
+    <div class="col-* ml-4">
+        <div class="form-group">
+            <label for="id_vendor_id">{% if form.vendor_id.required %}<small class="bg-warning"> *</small> {% endif %}Vendor ID</label>
+            {{form.vendor_id}}
+            <small>{{form.vendor_id.help_text}}</small>
+        </div>
+    </div>
+     <div class="col-*  ml-4">
+        <div class="form-group">
+            <label for="id_first_name">{{form.first_name.label}}</label>
+            {{form.first_name}}
+            <small>{{form.first_name.help_text}}</small>
+        </div>
+    </div>
+    <div class="col-*  ml-4">
+        <div class="form-group">
+            <label for="id_middle_name">{{form.middle_name.label}}</label>
+            {{form.middle_name}}
+            <small>{{form.middle_name.help_text}}</small>
+        </div>
+    </div>
+     <div class="col-*  ml-4">
+        <div class="form-group">
+            <label for="id_last_name">{% if form.last_name.required %}<small class="bg-warning"> *</small> {% endif %}{{form.last_name.label}}</label>
+            {{form.last_name}}
+            <small>{{form.last_name.help_text}}</small>
+        </div>
+    </div>
+    </div>
+    <div class="row">
+    <div class="col-*  ml-4">
+        <div class="form-group">
+            <label for="id_primary_no">{% if form.id_primary_no.required %}<small class="bg-warning"> *</small> {% endif %}{{form.primary_no.label}}</label>
+            {{form.primary_no}}
+            <small>{{form.primary_no.help_text}}</small>
+        </div>
+    </div>
+     <div class="col-*  ml-4">
+        <div class="form-group">
+            <label for="id_secondary_no">{% if form.secondary_no.required %}<small class="bg-warning"> *</small> {% endif %}{{form.secondary_no.label}}</label>
+            {{form.secondary_no}}
+            <small>{{form.secondary_no.help_text}}</small>
+        </div>
+    </div>
+    <div class="col-*  ml-4">
+        <div class="form-group">
+            <label for="id_company_email_id">{% if form.id_company_email_id.required %}<small class="bg-warning"> *</small> {% endif %}{{form.company_email_id.label}}</label>
+            {{form.company_email_id}}
+            <small>{{form.company_email_id.help_text}}</small>
+        </div>
+    </div>
+     <div class="col-*  ml-4">
+        <div class="form-group">
+            <label for="id_company_name">{% if form.company_name.required %}<small class="bg-warning"> *</small> {% endif %}{{form.company_name.label}}</label>
+            {{form.company_name}}
+            <small>{{form.company_name.help_text}}</small>
+        </div>
+    </div>
+    </div>
+<div class="row">
+    <div class="col-*  ml-4">
+        <div class="form-group">
+            <label for="id_content">{% if form.id_content.required %}<small class="bg-warning"> *</small> {% endif %}{{form.content.label}}</label>
+            {{form.content}}
+            <small>{{form.content.help_text}}</small>
+        </div>
+    </div>
+     <div class="col-*  ml-4">
+        <div class="form-group">
+            <label for="id_website_url">{% if form.website_url.required %}<small class="bg-warning"> *</small> {% endif %}{{form.website_url.label}}</label>
+            {{form.website_url}}
+            <small>{{form.website_url.help_text}}</small>
+        </div>
+    </div>
+    <div class="col-*  ml-4">
+        <div class="form-group">
+            <label for="id_product">{% if form.id_product.required %}<small class="bg-warning"> *</small> {% endif %}{{form.product.label}}</label>
+            {{form.product}}
+            <small>{{form.product.help_text}}</small>
+        </div>
+    </div>
+     <div class="col-*  ml-4">
+        <div class="form-group">
+            <label for="id_reference">{% if form.reference.required %}<small class="bg-warning"> *</small> {% endif %}{{form.reference.label}}</label>
+            {{form.reference}}
+            <small>{{form.reference.help_text}}</small>
+        </div>
+    </div>
+    </div>
+    <div class="row">
+    <div class="col-*  ml-4">
+        <div class="form-group">
+            <label for="id_comments">{% if form.id_comments.required %}<small class="bg-warning"> *</small> {% endif %}{{form.comments.label}}</label>
+            {{form.comments}}
+            <small>{{form.comments.help_text}}</small>
+        </div>
+    </div>
+     <div class="col-*  ml-4">
+        <div class="form-group">
+            <label for="id_created_by">{% if form.created_by.required %}<small class="bg-warning"> *</small> {% endif %}{{form.created_by.label}}</label>
+            {{form.created_by}}
+            <small> {{form.created_by.help_text}}</small>
+        </div>
+    </div>
+    <div class="col-*  ml-4">
+        <div class="form-group">
+            <label for="id_created_date">{% if form.id_created_date.required %}<small class="bg-warning"> *</small> {% endif %}{{form.created_date.label}}</label>
+            {{form.created_date}}
+            <small>{{form.created_date.help_text}}</small>
+        </div>
+    </div>
+     <div class="col-*  ml-4">
+        <div class="form-group">
+            <label for="id_updated_by">{% if form.updated_by.required %}<small class="bg-warning"> *</small> {% endif %}{{form.updated_by.label}}</label>
+            {{form.updated_by}}
+            <small>{{form.updated_by.help_text}}</small>
+        </div>
+    </div>
+    </div>
+    <div class="row">
+    <div class="col-* ml-4">
+        <div class="form-group">
+            <label for="id_updated_date">{% if form.id_updated_date.required %}<small class="bg-warning"> *</small> {% endif %}{{form.updated_date.label}}</label>
+            {{form.updated_date}}
+            <small>{{form.updated_date.help_text}}</small>
+        </div>
+    </div>
+
+    </div>
+    {% block buttons %}
+    <button type="submit" class="btn btn-primary">Submit</button>
+    {% endblock %}
+</form>
+</div>
+    {% endblock %}

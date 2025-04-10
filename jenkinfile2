@@ -1,0 +1,21 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('code') {
+            steps {
+                git branch: 'irctc', url: 'https://github.com/venadda/repo1.git'
+            }
+        }
+        stage('build'){
+            steps{
+                bat "mvn -f irctc/pom.xml -Dmaven.test.failure.ignore=true clean package -Dmaven.test.skip=true"
+        }
+        }
+        stage("deploy"){
+            steps{
+            deploy adapters: [tomcat9(credentialsId: '82b5a719-d75e-4f2e-8c91-b37c82f3fc2d', path: '', url: 'http://localhost:8881')], contextPath: 'irctc', war: '**/irctc.war'            
+            }
+        }
+    }
+}
